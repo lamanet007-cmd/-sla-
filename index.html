@@ -3,15 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Monster High – Čísla a počítání!</title>
+  <title>Monster High – Strašidelně zábavná čísla!</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Short+Stack&display=swap');
+
     :root {
-      --pink: #ff1493;
-      --dark-pink: #d10069;
+      --pink: #ff007f;
+      --bright-pink: #ff66c4;
+      --dark-pink: #99004d;
       --purple: #8a2be2;
-      --black: #111111;
-      --light-purple: #f3e8ff;
+      --dark-purple: #240038;
+      --black: #0d0d0d;
       --turquoise: #00f5d4;
+      --yellow: #ffee00;
     }
 
     * {
@@ -23,13 +27,13 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+      font-family: 'Short Stack', cursive, sans-serif;
       background-color: var(--black);
       background-image: 
-        radial-gradient(circle, #2b003b 10%, transparent 11%),
-        radial-gradient(circle, #1a001e 10%, transparent 11%);
-      background-size: 30px 30px;
-      background-position: 0 0, 15px 15px;
+        radial-gradient(circle at 20% 20%, rgba(138, 43, 226, 0.25) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(255, 0, 127, 0.25) 0%, transparent 40%),
+        radial-gradient(circle, #1a0026 12%, transparent 13%);
+      background-size: 100% 100%, 100% 100%, 30px 30px;
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -41,156 +45,176 @@
     /* Header & Fullscreen */
     header {
       width: 100%;
-      background: linear-gradient(90deg, var(--purple), var(--pink), var(--purple));
-      padding: 10px 20px;
+      background: linear-gradient(90deg, #1a0026, var(--dark-pink), var(--purple), #1a0026);
+      border-bottom: 4px solid var(--pink);
+      padding: 12px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 15px rgba(255, 20, 147, 0.5);
+      box-shadow: 0 4px 20px rgba(255, 0, 127, 0.6);
       z-index: 10;
     }
 
     .logo-container {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
-    .bow {
-      color: var(--pink);
-      font-size: 28px;
-      filter: drop-shadow(0 0 5px #fff);
+    .skull-icon {
+      font-size: 32px;
+      filter: drop-shadow(0 0 8px var(--bright-pink));
+      animation: pulse 2s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.15) rotate(5deg); }
     }
 
     h1 {
       margin: 0;
-      font-size: 24px;
-      text-shadow: 2px 2px 4px #000;
-      letter-spacing: 1px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 26px;
+      color: #fff;
+      text-shadow: 0 0 10px var(--pink), 3px 3px 0px #000;
+      letter-spacing: 1.5px;
     }
 
     .fs-btn {
-      background: var(--black);
-      color: var(--pink);
-      border: 2px solid var(--pink);
-      border-radius: 20px;
-      padding: 8px 16px;
-      font-weight: bold;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 25px;
+      padding: 10px 18px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 14px;
       cursor: pointer;
-      box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.8);
       transition: all 0.2s;
     }
 
     .fs-btn:hover {
-      transform: scale(1.05);
-      background: var(--pink);
-      color: #fff;
+      transform: scale(1.08);
+      box-shadow: 0 0 25px var(--bright-pink);
     }
 
-    /* Game Navigation & Score */
+    /* Navigation & Score */
     .top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       width: 95%;
-      max-width: 800px;
+      max-width: 900px;
       margin: 15px 0;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .nav-btns {
       display: flex;
-      gap: 10px;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .mode-btn {
-      background: #222;
+      background: rgba(36, 0, 56, 0.9);
       border: 2px solid var(--purple);
       color: #fff;
       padding: 8px 14px;
-      border-radius: 15px;
+      border-radius: 18px;
       cursor: pointer;
-      font-weight: bold;
+      font-family: 'Fredoka One', cursive;
+      font-size: 13px;
       transition: all 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     }
 
-    .mode-btn.active {
-      background: var(--pink);
+    .mode-btn.active, .mode-btn:hover {
+      background: linear-gradient(135deg, var(--pink), var(--dark-pink));
       border-color: #fff;
-      box-shadow: 0 0 12px var(--pink);
-      transform: scale(1.05);
+      box-shadow: 0 0 15px var(--pink);
+      transform: translateY(-2px);
     }
 
     .score-board {
-      background: rgba(138, 43, 226, 0.3);
-      border: 2px solid var(--pink);
-      padding: 6px 15px;
-      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(138, 43, 226, 0.4), rgba(255, 0, 127, 0.4));
+      border: 2px solid var(--bright-pink);
+      padding: 6px 18px;
+      border-radius: 25px;
+      font-family: 'Fredoka One', cursive;
       font-size: 18px;
       display: flex;
       align-items: center;
       gap: 8px;
+      box-shadow: 0 0 12px rgba(255, 0, 127, 0.4);
     }
 
-    /* Main Container */
+    /* Main Card */
     .game-card {
-      background: rgba(20, 10, 30, 0.9);
+      background: linear-gradient(180deg, rgba(30, 5, 45, 0.95), rgba(15, 2, 25, 0.98));
       border: 4px solid var(--pink);
-      border-radius: 25px;
+      border-radius: 30px;
       width: 95%;
-      max-width: 800px;
-      min-height: 480px;
-      padding: 20px;
+      max-width: 900px;
+      min-height: 520px;
+      padding: 25px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      box-shadow: 0 0 25px rgba(239, 10, 147, 0.4);
+      box-shadow: 0 0 35px rgba(255, 0, 127, 0.5), inset 0 0 15px rgba(138, 43, 226, 0.5);
       position: relative;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
     .instruction-box {
-      background: linear-gradient(135deg, var(--purple), var(--dark-pink));
-      padding: 12px 25px;
-      border-radius: 20px;
-      font-size: 22px;
+      background: linear-gradient(90deg, var(--purple), var(--pink), var(--purple));
+      border: 2px solid #fff;
+      padding: 12px 28px;
+      border-radius: 25px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 20px;
       text-align: center;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      margin-bottom: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.6);
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      transition: transform 0.2s;
     }
 
     .instruction-box:hover {
-      transform: scale(1.02);
+      transform: scale(1.03);
     }
 
-    /* Mode 1: Counting */
+    /* Common Grids */
     .items-grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
       gap: 15px;
-      min-height: 180px;
-      max-width: 600px;
+      min-height: 160px;
+      max-width: 700px;
       margin-bottom: 25px;
-      padding: 15px;
-      background: rgba(0, 0, 0, 0.4);
-      border-radius: 15px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 2px dashed var(--purple);
+      border-radius: 20px;
+      width: 100%;
     }
 
     .monster-item {
-      font-size: 45px;
-      filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
+      font-size: 48px;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,0.7));
       animation: float 3s ease-in-out infinite alternate;
       cursor: pointer;
       transition: transform 0.2s;
     }
 
     .monster-item:hover {
-      transform: scale(1.2) rotate(10deg);
+      transform: scale(1.3) rotate(12deg);
     }
 
     @keyframes float {
@@ -206,16 +230,16 @@
     }
 
     .num-btn {
-      width: 70px;
-      height: 70px;
+      width: 75px;
+      height: 75px;
       border-radius: 50%;
-      background: linear-gradient(145deg, var(--purple), #4a0e4e);
-      border: 3px solid var(--pink);
+      background: linear-gradient(145deg, var(--purple), #3b004f);
+      border: 3px solid var(--bright-pink);
       color: #fff;
-      font-size: 32px;
-      font-weight: bold;
+      font-family: 'Fredoka One', cursive;
+      font-size: 34px;
       cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.6);
       transition: all 0.2s;
       display: flex;
       justify-content: center;
@@ -223,54 +247,133 @@
     }
 
     .num-btn:hover {
-      transform: scale(1.15) rotate(-5deg);
+      transform: scale(1.18) rotate(-5deg);
       background: var(--pink);
-      box-shadow: 0 0 20px var(--pink);
+      box-shadow: 0 0 25px var(--pink);
     }
 
-    /* Mode 2: Show Number */
-    .big-target {
-      font-size: 110px;
-      font-weight: bold;
-      color: var(--turquoise);
-      text-shadow: 0 0 20px var(--turquoise), 3px 3px 0px #000;
-      margin: 10px 0;
-      font-family: 'Arial Black', sans-serif;
-    }
-
-    .cards-grid {
+    /* Learning Mode */
+    .learn-container {
       display: flex;
-      gap: 20px;
       flex-wrap: wrap;
+      gap: 12px;
       justify-content: center;
+      max-width: 750px;
     }
 
-    .card-choice {
+    .learn-card {
       width: 120px;
-      height: 120px;
-      background: #2a103c;
+      height: 130px;
+      background: rgba(36, 0, 56, 0.8);
       border: 3px solid var(--purple);
-      border-radius: 15px;
+      border-radius: 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.3s;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      transition: all 0.25s;
     }
 
-    .card-choice:hover {
+    .learn-card:hover {
       border-color: var(--pink);
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(255, 20, 147, 0.6);
+      transform: scale(1.1);
+      box-shadow: 0 0 20px var(--pink);
+      background: rgba(255, 0, 127, 0.2);
     }
 
-    .card-choice .icons {
-      font-size: 24px;
+    .learn-card .num {
+      font-family: 'Fredoka One', cursive;
+      font-size: 42px;
+      color: var(--turquoise);
+      text-shadow: 0 0 10px var(--turquoise);
+    }
+
+    .learn-card .icons {
+      font-size: 18px;
+      margin-top: 5px;
       word-break: break-all;
       text-align: center;
-      line-height: 1.2;
+    }
+
+    /* Compare Mode */
+    .compare-box {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .compare-side {
+      background: rgba(0,0,0,0.5);
+      border: 2px solid var(--purple);
+      border-radius: 20px;
+      padding: 15px;
+      min-width: 180px;
+      min-height: 130px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      font-size: 35px;
+    }
+
+    /* Cat Mascot & Celebration Animation */
+    .cat-container {
+      position: fixed;
+      bottom: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1000;
+      pointer-events: none;
+      transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .cat-container.active {
+      bottom: 20px;
+    }
+
+    .cat-avatar {
+      font-size: 110px;
+      filter: drop-shadow(0 0 20px var(--pink));
+      animation: catDance 0.6s infinite alternate ease-in-out;
+    }
+
+    @keyframes catDance {
+      0% { transform: translateY(0) rotate(-8deg) scale(1); }
+      100% { transform: translateY(-25px) rotate(8deg) scale(1.1); }
+    }
+
+    .cat-speech {
+      background: #fff;
+      color: var(--black);
+      font-family: 'Fredoka One', cursive;
+      font-size: 22px;
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: 3px solid var(--pink);
+      box-shadow: 0 0 15px var(--bright-pink);
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .cat-speech::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 12px 12px 0;
+      border-style: solid;
+      border-color: #fff transparent;
+      display: block;
+      width: 0;
     }
 
     /* Mode 3: Connect Dots Canvas */
@@ -279,54 +382,25 @@
       width: 500px;
       height: 350px;
       background: rgba(0,0,0,0.6);
-      border: 2px dashed var(--pink);
-      border-radius: 15px;
+      border: 3px dashed var(--pink);
+      border-radius: 20px;
+      box-shadow: inset 0 0 20px rgba(255,0,127,0.3);
     }
 
     canvas {
       width: 100%;
       height: 100%;
-      border-radius: 15px;
+      border-radius: 20px;
     }
 
-    /* Character Companion */
-    .character-box {
-      position: absolute;
-      bottom: -10px;
-      right: 10px;
-      display: flex;
-      align-items: flex-end;
-      pointer-events: none;
-    }
-
-    .avatar {
-      font-size: 60px;
-      filter: drop-shadow(0 0 10px var(--pink));
-    }
-
-    /* Feedback Overlay */
-    .feedback {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      font-size: 80px;
-      pointer-events: none;
-      transition: transform 0.3s ease-out;
-      z-index: 100;
-    }
-
-    .feedback.show {
-      transform: translate(-50%, -50%) scale(1.2);
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
       h1 { font-size: 18px; }
-      .instruction-box { font-size: 17px; }
+      .instruction-box { font-size: 16px; padding: 10px 15px; }
       .num-btn { width: 55px; height: 55px; font-size: 24px; }
-      .canvas-container { width: 320px; height: 280px; }
-      .card-choice { width: 90px; height: 90px; }
+      .canvas-container { width: 320px; height: 260px; }
+      .learn-card { width: 90px; height: 100px; }
+      .learn-card .num { font-size: 30px; }
+      .cat-avatar { font-size: 80px; }
     }
   </style>
 </head>
@@ -334,21 +408,23 @@
 
   <header>
     <div class="logo-container">
-      <span class="bow">🎀</span>
-      <h1>Monster High: Čísla</h1>
+      <span class="skull-icon">💀🎀</span>
+      <h1>Monster High Čísla</h1>
     </div>
-    <button class="fs-btn" onclick="toggleFullScreen()">Fullscreen ⛶</button>
+    <button class="fs-btn" onclick="toggleFullScreen()">Full Screen ⛶</button>
   </header>
 
   <div class="top-bar">
     <div class="nav-btns">
-      <button class="mode-btn active" onclick="switchMode(1)">Spočítej</button>
-      <button class="mode-btn" onclick="switchMode(2)">Najdi Číslo</button>
-      <button class="mode-btn" onclick="switchMode(3)">Spojovačka</button>
+      <button class="mode-btn active" onclick="switchMode(1)">Nauka Čísel</button>
+      <button class="mode-btn" onclick="switchMode(2)">Spočítej</button>
+      <button class="mode-btn" onclick="switchMode(3)">Porovnávač</button>
+      <button class="mode-btn" onclick="switchMode(4)">Sčítání</button>
+      <button class="mode-btn" onclick="switchMode(5)">Spojovačka</button>
     </div>
     <div class="score-board">
       <span>Trofeje:</span>
-      <span id="score-count" style="color: var(--pink); font-weight: bold;">0</span>
+      <span id="score-count" style="color: var(--yellow);">0</span>
       <span>🏆</span>
     </div>
   </div>
@@ -356,37 +432,56 @@
   <div class="game-card">
     <div class="instruction-box" id="instruction" onclick="repeatInstruction()">
       <span id="speaker-icon">🔊</span>
-      <span id="instruction-text">Načítám hru...</span>
+      <span id="instruction-text">Vítá tě Monster High! Vyber si hru.</span>
     </div>
 
-    <!-- Mode 1: Spočítej předměty -->
+    <!-- Mode 1: Nauka Čísel -->
     <div id="mode-1" class="game-mode-container" style="display: flex; flex-direction: column; align-items: center; width:100%;">
+      <div class="learn-container" id="learn-grid"></div>
+    </div>
+
+    <!-- Mode 2: Spočítej předměty -->
+    <div id="mode-2" class="game-mode-container" style="display: none; flex-direction: column; align-items: center; width:100%;">
       <div class="items-grid" id="items-container"></div>
       <div class="options-grid" id="options-container"></div>
     </div>
 
-    <!-- Mode 2: Najdi správné číslo / kartičku -->
-    <div id="mode-2" class="game-mode-container" style="display: none; flex-direction: column; align-items: center; width:100%;">
-      <div class="big-target" id="target-number">5</div>
-      <div class="cards-grid" id="cards-container"></div>
+    <!-- Mode 3: Porovnávač -->
+    <div id="mode-3" class="game-mode-container" style="display: none; flex-direction: column; align-items: center; width:100%;">
+      <div class="compare-box">
+        <div class="compare-side" id="compare-left"></div>
+        <div style="font-size: 40px; font-weight: bold; color: var(--pink);">?</div>
+        <div class="compare-side" id="compare-right"></div>
+      </div>
+      <div class="options-grid" id="compare-options"></div>
     </div>
 
-    <!-- Mode 3: Spojovačka -->
-    <div id="mode-3" class="game-mode-container" style="display: none; flex-direction: column; align-items: center; width:100%;">
+    <!-- Mode 4: Sčítání -->
+    <div id="mode-4" class="game-mode-container" style="display: none; flex-direction: column; align-items: center; width:100%;">
+      <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+        <div class="compare-side" id="add-left"></div>
+        <div style="font-size: 45px; color: var(--turquoise); font-family: 'Fredoka One';">+</div>
+        <div class="compare-side" id="add-right"></div>
+      </div>
+      <div class="options-grid" id="add-options"></div>
+    </div>
+
+    <!-- Mode 5: Spojovačka -->
+    <div id="mode-5" class="game-mode-container" style="display: none; flex-direction: column; align-items: center; width:100%;">
       <div class="canvas-container">
         <canvas id="connect-canvas" width="500" height="350"></canvas>
       </div>
     </div>
+  </div>
 
-    <div class="character-box">
-      <div class="avatar" id="avatar-emoji">🧛‍♀️</div>
-    </div>
-
-    <div class="feedback" id="feedback-emoji">💖</div>
+  <!-- Animated Cat Celebration Overlay -->
+  <div class="cat-container" id="cat-mascot">
+    <div class="cat-speech" id="cat-text">Mňau! Úžasně! 💖</div>
+    <div class="cat-avatar">🐈‍⬛🎀</div>
   </div>
 
   <script>
-    // Audio Synth for FX
+    // Audio Synth
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     
     function playTone(freq, type = 'sine', duration = 0.15) {
@@ -395,7 +490,7 @@
       const gain = audioCtx.createGain();
       osc.type = type;
       osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
       osc.connect(gain);
       gain.connect(audioCtx.destination);
@@ -405,24 +500,24 @@
 
     function playWinSound() {
       playTone(523.25, 'triangle', 0.1);
-      setTimeout(() => playTone(659.25, 'triangle', 0.1), 100);
-      setTimeout(() => playTone(783.99, 'triangle', 0.15), 200);
-      setTimeout(() => playTone(1046.50, 'triangle', 0.3), 300);
+      setTimeout(() => playTone(659.25, 'triangle', 0.1), 90);
+      setTimeout(() => playTone(783.99, 'triangle', 0.12), 180);
+      setTimeout(() => playTone(1046.50, 'triangle', 0.25), 270);
     }
 
     function playErrorSound() {
-      playTone(200, 'sawtooth', 0.2);
-      setTimeout(() => playTone(150, 'sawtooth', 0.25), 150);
+      playTone(220, 'sawtooth', 0.2);
+      setTimeout(() => playTone(160, 'sawtooth', 0.25), 150);
     }
 
-    // Voice synthesis (Czech)
+    // Czech Speech
     function speak(text) {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const msg = new SpeechSynthesisUtterance(text);
         msg.lang = 'cs-CZ';
-        msg.rate = 0.9;
-        msg.pitch = 1.2; 
+        msg.rate = 0.88;
+        msg.pitch = 1.2;
         window.speechSynthesis.speak(msg);
       }
     }
@@ -430,13 +525,14 @@
     // Game Variables
     let currentMode = 1;
     let score = 0;
-    let currentAnswer = 0;
+    let currentAnswer = null;
     let lastText = "";
 
-    const monsterItems = ['🦇', '🎀', '🧪', '🕷️', '💄', '🔮', '⚡', '👑', '💀'];
-    const avatars = ['🧛‍♀️', '🐺', '⚡', 'Cleo'];
+    const monsterItems = ['🦇', '🎀', '🧪', '🕷️', '💄', '🔮', '⚡', '👑', '💀', '🌙'];
+    const catPraise = ['Mňau! To bylo skvělé!', 'Kočička Crescent tě chválí!', 'Mňau! Jsi šikovná!', 'Úžasná práce! 💖', 'Monster High tě miluje!'];
 
-    // Web Speech Warmup
+    const numberNames = ['Jeden', 'Dva', 'Tři', 'Čtyři', 'Pět', 'Šest', 'Sedm', 'Osm', 'Devět', 'Deset'];
+
     document.addEventListener('click', () => {
       if (audioCtx.state === 'suspended') audioCtx.resume();
     }, { once: true });
@@ -453,20 +549,23 @@
 
     function updateScore(points) {
       score += points;
-      if (score < 0) score = 0;
       document.getElementById('score-count').innerText = score;
     }
 
-    function showFeedback(isCorrect) {
-      const fb = document.getElementById('feedback-emoji');
-      fb.innerText = isCorrect ? '💖' : '❌';
-      fb.classList.add('show');
-      if (isCorrect) {
-        playWinSound();
-      } else {
-        playErrorSound();
-      }
-      setTimeout(() => fb.classList.remove('show'), 800);
+    // Cat Celebration Animation
+    function triggerCatCelebration() {
+      playWinSound();
+      const cat = document.getElementById('cat-mascot');
+      const catText = document.getElementById('cat-text');
+      
+      const randomText = catPraise[Math.floor(Math.random() * catPraise.length)];
+      catText.innerText = randomText;
+      speak(randomText);
+
+      cat.classList.add('active');
+      setTimeout(() => {
+        cat.classList.remove('active');
+      }, 2200);
     }
 
     function switchMode(mode) {
@@ -475,23 +574,50 @@
         btn.classList.toggle('active', idx + 1 === mode);
       });
 
-      document.getElementById('mode-1').style.display = mode === 1 ? 'flex' : 'none';
-      document.getElementById('mode-2').style.display = mode === 2 ? 'flex' : 'none';
-      document.getElementById('mode-3').style.display = mode === 3 ? 'flex' : 'none';
+      for (let i = 1; i <= 5; i++) {
+        document.getElementById(`mode-${i}`).style.display = i === mode ? 'flex' : 'none';
+      }
 
       if (mode === 1) initMode1();
       if (mode === 2) initMode2();
       if (mode === 3) initMode3();
+      if (mode === 4) initMode4();
+      if (mode === 5) initMode5();
     }
 
-    // --- MODE 1: Spočítej věci ---
+    // --- MODE 1: Nauka Čísel ---
     function initMode1() {
+      setInstruction("Klikni na číslice a nauč se, jak vypadají a jak se čtou!");
+      const grid = document.getElementById('learn-grid');
+      grid.innerHTML = '';
+
+      for (let i = 1; i <= 10; i++) {
+        const card = document.createElement('div');
+        card.className = 'learn-card';
+        const icon = monsterItems[(i - 1) % monsterItems.length];
+        
+        card.innerHTML = `
+          <div class="num">${i}</div>
+          <div class="icons">${icon.repeat(Math.min(i, 4))}${i > 4 ? '...' : ''}</div>
+        `;
+
+        card.onclick = () => {
+          playTone(400 + (i * 40), 'sine', 0.2);
+          speak(`${i}. ${numberNames[i-1]}. ${i} ${icon}`);
+        };
+
+        grid.appendChild(card);
+      }
+    }
+
+    // --- MODE 2: Spočítej věci ---
+    function initMode2() {
       const container = document.getElementById('items-container');
       const options = document.getElementById('options-container');
       container.innerHTML = '';
       options.innerHTML = '';
 
-      const count = Math.floor(Math.random() * 10) + 1; // 1 - 10
+      const count = Math.floor(Math.random() * 10) + 1;
       currentAnswer = count;
       const itemIcon = monsterItems[Math.floor(Math.random() * monsterItems.length)];
 
@@ -499,15 +625,106 @@
         const el = document.createElement('div');
         el.className = 'monster-item';
         el.innerText = itemIcon;
-        el.style.animationDelay = (i * 0.1) + 's';
-        el.onclick = () => playTone(400 + (i * 50), 'sine', 0.1);
+        el.onclick = () => playTone(350 + (i * 40), 'sine', 0.1);
         container.appendChild(el);
       }
 
-      setInstruction(`Spočítej ikonky a klikni na správné číslo!`);
+      setInstruction(`Spočítej obrázky a klikni na správné číslo!`);
 
-      // Generate 3 choices
       let choices = [count];
+      while (choices.length < 4) {
+        let rnd = Math.floor(Math.random() * 10) + 1;
+        if (!choices.includes(rnd)) choices.push(rnd);
+      }
+      choices.sort(() => Math.random() - 0.5);
+
+      choices.forEach(num => {
+        const btn = document.createElement('button');
+        btn.className = 'num-btn';
+        btn.innerText = num;
+        btn.onclick = () => {
+          if (num === currentAnswer) {
+            updateScore(1);
+            triggerCatCelebration();
+            setTimeout(initMode2, 2300);
+          } else {
+            playErrorSound();
+            speak("Zkus to znovu!");
+          }
+        };
+        options.appendChild(btn);
+      });
+    }
+
+    // --- MODE 3: Porovnávání (<, >, =) ---
+    let leftVal = 0, rightVal = 0;
+
+    function initMode3() {
+      setInstruction("Kde je VÍCE věcí? Nebo je jich STEJNĚ?");
+      const leftEl = document.getElementById('compare-left');
+      const rightEl = document.getElementById('compare-right');
+      const options = document.getElementById('compare-options');
+
+      leftEl.innerHTML = '';
+      rightEl.innerHTML = '';
+      options.innerHTML = '';
+
+      leftVal = Math.floor(Math.random() * 6) + 1;
+      rightVal = Math.floor(Math.random() * 6) + 1;
+
+      const icon1 = monsterItems[Math.floor(Math.random() * monsterItems.length)];
+      const icon2 = monsterItems[Math.floor(Math.random() * monsterItems.length)];
+
+      leftEl.innerText = icon1.repeat(leftVal);
+      rightEl.innerText = icon2.repeat(rightVal);
+
+      const choices = [
+        { label: 'Vlevo je více ⬅️', correct: leftVal > rightVal },
+        { label: 'Stejně ⚖️', correct: leftVal === rightVal },
+        { label: 'Vpravo je více ➡️', correct: leftVal < rightVal }
+      ];
+
+      choices.forEach(c => {
+        const btn = document.createElement('button');
+        btn.className = 'mode-btn';
+        btn.style.fontSize = '16px';
+        btn.style.padding = '12px 20px';
+        btn.innerText = c.label;
+        btn.onclick = () => {
+          if (c.correct) {
+            updateScore(1);
+            triggerCatCelebration();
+            setTimeout(initMode3, 2300);
+          } else {
+            playErrorSound();
+            speak("Zkus to ještě jednou porovnat.");
+          }
+        };
+        options.appendChild(btn);
+      });
+    }
+
+    // --- MODE 4: Sčítání ---
+    function initMode4() {
+      const leftEl = document.getElementById('add-left');
+      const rightEl = document.getElementById('add-right');
+      const options = document.getElementById('add-options');
+
+      leftEl.innerHTML = '';
+      rightEl.innerHTML = '';
+      options.innerHTML = '';
+
+      const a = Math.floor(Math.random() * 5) + 1;
+      const b = Math.floor(Math.random() * 5) + 1;
+      currentAnswer = a + b;
+
+      const icon = monsterItems[Math.floor(Math.random() * monsterItems.length)];
+      leftEl.innerText = icon.repeat(a);
+      rightEl.innerText = icon.repeat(b);
+
+      setInstruction(`Spočítej všechny věci dohromady: ${a} + ${b}`);
+
+      let choices = [currentAnswer];
       while (choices.length < 3) {
         let rnd = Math.floor(Math.random() * 10) + 1;
         if (!choices.includes(rnd)) choices.push(rnd);
@@ -518,76 +735,25 @@
         const btn = document.createElement('button');
         btn.className = 'num-btn';
         btn.innerText = num;
-        btn.onclick = () => checkMode1(num);
+        btn.onclick = () => {
+          if (num === currentAnswer) {
+            updateScore(1);
+            triggerCatCelebration();
+            setTimeout(initMode4, 2300);
+          } else {
+            playErrorSound();
+            speak("Zkus to sečíst znovu!");
+          }
+        };
         options.appendChild(btn);
       });
     }
 
-    function checkMode1(selected) {
-      if (selected === currentAnswer) {
-        showFeedback(true);
-        updateScore(1);
-        speak("Skvělé! To je správně!");
-        setTimeout(initMode1, 1200);
-      } else {
-        showFeedback(false);
-        speak("Zkus to znovu, spočítej to ještě jednou.");
-      }
-    }
-
-    // --- MODE 2: Najdi číslo ---
-    function initMode2() {
-      const targetEl = document.getElementById('target-number');
-      const cardsContainer = document.getElementById('cards-container');
-      cardsContainer.innerHTML = '';
-
-      const targetNum = Math.floor(Math.random() * 10) + 1;
-      currentAnswer = targetNum;
-      targetEl.innerText = targetNum;
-
-      setInstruction(`Která kartička má ${targetNum} věcí?`);
-
-      const itemIcon = monsterItems[Math.floor(Math.random() * monsterItems.length)];
-
-      // Make 3 card choices
-      let choices = [targetNum];
-      while (choices.length < 3) {
-        let rnd = Math.floor(Math.random() * 10) + 1;
-        if (!choices.includes(rnd)) choices.push(rnd);
-      }
-      choices.sort(() => Math.random() - 0.5);
-
-      choices.forEach(count => {
-        const card = document.createElement('div');
-        card.className = 'card-choice';
-        
-        const iconsDiv = document.createElement('div');
-        iconsDiv.className = 'icons';
-        iconsDiv.innerText = itemIcon.repeat(count);
-        
-        card.appendChild(iconsDiv);
-        card.onclick = () => checkMode2(count);
-        cardsContainer.appendChild(card);
-      });
-    }
-
-    function checkMode2(selected) {
-      if (selected === currentAnswer) {
-        showFeedback(true);
-        updateScore(1);
-        speak("Úžasné! Našla jsi správnou kartičku!");
-        setTimeout(initMode2, 1200);
-      } else {
-        showFeedback(false);
-        speak("Ajej, tady je jiný počet. Hledej dál!");
-      }
-    }
-
-    // --- MODE 3: Spojovačka (Connect Dots 1 to 5 or 10) ---
+    // --- MODE 5: Spojovačka ---
     let dots = [];
     let nextDotIndex = 0;
 
-    function initMode3() {
+    function initMode5() {
       setInstruction("Spoj tečky podle čísel od 1 do 5!");
       const canvas = document.getElementById('connect-canvas');
       const ctx = canvas.getContext('2d');
@@ -612,19 +778,15 @@
         const targetDot = dots[nextDotIndex];
         const dist = Math.hypot(clickX - targetDot.x, clickY - targetDot.y);
 
-        if (dist < 30) {
-          // Hit correct dot
-          playTone(300 + (nextDotIndex * 100), 'sine', 0.15);
+        if (dist < 35) {
+          playTone(300 + (nextDotIndex * 90), 'sine', 0.15);
           speak(targetDot.num.toString());
           nextDotIndex++;
 
           if (nextDotIndex === dots.length) {
-            showFeedback(true);
             updateScore(2);
-            setTimeout(() => {
-              speak("Nádherné! Spojila jsi celou mašli Monster High!");
-              drawFinalShape();
-            }, 300);
+            triggerCatCelebration();
+            drawFinalShape();
           } else {
             drawCanvas();
           }
@@ -637,11 +799,10 @@
       const ctx = canvas.getContext('2d');
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw connected lines
       if (nextDotIndex > 1) {
         ctx.beginPath();
-        ctx.strokeStyle = '#ff1493';
-        ctx.lineWidth = 5;
+        ctx.strokeStyle = '#ff007f';
+        ctx.lineWidth = 6;
         ctx.moveTo(dots[0].x, dots[0].y);
         for (let i = 1; i < nextDotIndex; i++) {
           ctx.lineTo(dots[i].x, dots[i].y);
@@ -649,18 +810,17 @@
         ctx.stroke();
       }
 
-      // Draw Dots
       dots.forEach((dot, idx) => {
         ctx.beginPath();
-        ctx.arc(dot.x, dot.y, 18, 0, Math.PI * 2);
-        ctx.fillStyle = idx < nextDotIndex ? '#ff1493' : (idx === nextDotIndex ? '#00f5d4' : '#8a2be2');
+        ctx.arc(dot.x, dot.y, 20, 0, Math.PI * 2);
+        ctx.fillStyle = idx < nextDotIndex ? '#ff007f' : (idx === nextDotIndex ? '#00f5d4' : '#8a2be2');
         ctx.fill();
         ctx.lineWidth = 3;
         ctx.strokeStyle = '#fff';
         ctx.stroke();
 
         ctx.fillStyle = '#fff';
-        ctx.font = 'bold 18px Arial';
+        ctx.font = 'bold 20px Fredoka One';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(dot.num, dot.x, dot.y);
@@ -671,42 +831,35 @@
       const canvas = document.getElementById('connect-canvas');
       const ctx = canvas.getContext('2d');
       
-      // Close path
       ctx.beginPath();
-      ctx.strokeStyle = '#ff1493';
+      ctx.strokeStyle = '#ff007f';
       ctx.lineWidth = 6;
       ctx.moveTo(dots[0].x, dots[0].y);
       for (let i = 1; i < dots.length; i++) {
         ctx.lineTo(dots[i].x, dots[i].y);
       }
       ctx.closePath();
-      ctx.fillStyle = 'rgba(255, 20, 147, 0.4)';
+      ctx.fillStyle = 'rgba(255, 0, 127, 0.45)';
       ctx.fill();
       ctx.stroke();
 
-      // Big Ribbon emoji in middle
-      ctx.font = '70px Arial';
+      ctx.font = '80px Arial';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText('🎀', 250, 180);
+      ctx.fillText('🎀', 250, 185);
 
-      setTimeout(initMode3, 3000);
+      setTimeout(initMode5, 3000);
     }
 
-    // Fullscreen Toggle
+    // Fullscreen
     function toggleFullScreen() {
       if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(err => {
-          alert(`Chyba při přechodu na celou obrazovku: ${err.message}`);
-        });
+        document.documentElement.requestFullscreen().catch(() => {});
       } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        }
+        if (document.exitFullscreen) document.exitFullscreen();
       }
     }
 
-    // Start initial game
     window.onload = () => {
       initMode1();
     };
