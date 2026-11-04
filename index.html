@@ -105,7 +105,7 @@
       justify-content: space-between;
       align-items: center;
       width: 95%;
-      max-width: 900px;
+      max-width: 950px;
       margin: 15px 0;
       flex-wrap: wrap;
       gap: 10px;
@@ -137,6 +137,12 @@
       transform: translateY(-2px);
     }
 
+    .shop-btn-nav {
+      background: linear-gradient(135deg, var(--yellow), #ff9900) !important;
+      color: #000 !important;
+      border-color: #fff !important;
+    }
+
     .score-board {
       background: linear-gradient(135deg, rgba(138, 43, 226, 0.4), rgba(255, 0, 127, 0.4));
       border: 2px solid var(--bright-pink);
@@ -156,7 +162,7 @@
       border: 4px solid var(--pink);
       border-radius: 30px;
       width: 95%;
-      max-width: 900px;
+      max-width: 950px;
       min-height: 520px;
       padding: 25px;
       display: flex;
@@ -252,7 +258,7 @@
       box-shadow: 0 0 25px var(--pink);
     }
 
-    /* Learning Mode */
+    /* Learn Grid */
     .learn-container {
       display: flex;
       flex-wrap: wrap;
@@ -358,6 +364,99 @@
       box-shadow: 0 0 20px var(--turquoise);
     }
 
+    /* Pexeso Grid */
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      max-width: 550px;
+      width: 100%;
+    }
+
+    .memory-card {
+      height: 95px;
+      background: linear-gradient(135deg, var(--purple), var(--dark-purple));
+      border: 3px solid var(--bright-pink);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fredoka One', cursive;
+      font-size: 32px;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .memory-card.flipped {
+      background: #fff;
+      color: var(--black);
+      border-color: var(--turquoise);
+      transform: rotateY(180deg);
+    }
+
+    .memory-card.matched {
+      background: rgba(0, 245, 212, 0.3);
+      border-color: var(--turquoise);
+      cursor: default;
+      opacity: 0.8;
+    }
+
+    /* Shop Grid */
+    .shop-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: center;
+      max-width: 800px;
+    }
+
+    .shop-item {
+      background: rgba(36, 0, 56, 0.85);
+      border: 3px solid var(--purple);
+      border-radius: 22px;
+      padding: 15px;
+      width: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .shop-item:hover {
+      border-color: var(--yellow);
+      transform: translateY(-3px);
+    }
+
+    .shop-item .icon { font-size: 50px; }
+    .shop-item .name { font-family: 'Fredoka One', cursive; font-size: 16px; text-align: center; }
+    .shop-item .price { color: var(--yellow); font-family: 'Fredoka One', cursive; font-size: 18px; }
+
+    .buy-btn {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      border: 2px solid #fff;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 15px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .buy-btn:disabled {
+      background: #444;
+      border-color: #666;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .buy-btn.equipped {
+      background: var(--turquoise);
+      color: var(--black);
+    }
+
     /* Cat Mascot in bottom-right corner without blocking clicks */
     .cat-container {
       position: fixed;
@@ -375,9 +474,23 @@
       bottom: 15px;
     }
 
+    .cat-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     .cat-avatar {
       font-size: 100px;
       filter: drop-shadow(0 0 20px var(--pink));
+      animation: catDance 0.6s infinite alternate ease-in-out;
+    }
+
+    .cat-accessory {
+      position: absolute;
+      top: -15px;
+      font-size: 45px;
       animation: catDance 0.6s infinite alternate ease-in-out;
     }
 
@@ -429,7 +542,7 @@
       border-radius: 20px;
     }
 
-    @media (max-width: 650px) {
+    @media (max-width: 700px) {
       h1 { font-size: 18px; }
       .instruction-box { font-size: 16px; padding: 10px 15px; }
       .num-btn { width: 55px; height: 55px; font-size: 24px; }
@@ -438,6 +551,8 @@
       .learn-card .num { font-size: 30px; }
       .compare-side { min-width: 140px; min-height: 120px; font-size: 28px; }
       .equal-btn { padding: 10px 14px; font-size: 16px; }
+      .memory-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+      .memory-card { height: 70px; font-size: 24px; }
       .cat-avatar { font-size: 75px; }
       .cat-speech { font-size: 16px; }
     }
@@ -460,6 +575,9 @@
       <button class="mode-btn" onclick="switchMode(3)">Porovnávač</button>
       <button class="mode-btn" onclick="switchMode(4)">Sčítání</button>
       <button class="mode-btn" onclick="switchMode(5)">Spojovačka</button>
+      <button class="mode-btn" onclick="switchMode(6)">Poslechni & Najdi</button>
+      <button class="mode-btn" onclick="switchMode(7)">Pexeso</button>
+      <button class="mode-btn shop-btn-nav" onclick="switchMode(8)">🛒 Obchůdek</button>
     </div>
     <div class="score-board">
       <span>Trofeje Lili:</span>
@@ -485,7 +603,7 @@
       <div class="options-grid" id="options-container"></div>
     </div>
 
-    <!-- Mode 3: Porovnávač (Klikání přímo na políčka) -->
+    <!-- Mode 3: Porovnávač -->
     <div id="mode-3" class="game-mode-container" style="display: none; flex-direction: column; align-items: center; width:100%;">
       <div class="compare-box">
         <div class="compare-side" id="compare-left" onclick="checkCompare('left')"></div>
@@ -513,12 +631,30 @@
         <canvas id="connect-canvas" width="500" height="350"></canvas>
       </div>
     </div>
+
+    <!-- Mode 6: Poslechni a Najdi -->
+    <div id="mode-6" class="game-mode-container" style="display: none; flex-direction: column; align-items: center; width:100%;">
+      <div class="options-grid" id="listen-options" style="margin-top: 20px;"></div>
+    </div>
+
+    <!-- Mode 7: Pexeso -->
+    <div id="mode-7" class="game-mode-container" style="display: none; flex-direction: column; align-items: center; width:100%;">
+      <div class="memory-grid" id="memory-board"></div>
+    </div>
+
+    <!-- Mode 8: Obchůdek s odměnami -->
+    <div id="mode-8" class="game-mode-container" style="display: none; flex-direction: column; align-items: center; width:100%;">
+      <div class="shop-grid" id="shop-items-container"></div>
+    </div>
   </div>
 
   <!-- Animated Cat Celebration Overlay -->
   <div class="cat-container" id="cat-mascot">
     <div class="cat-speech" id="cat-text">Mňau! Skvěle, Lili! 💖</div>
-    <div class="cat-avatar">🐈‍⬛🎀</div>
+    <div class="cat-wrapper">
+      <div class="cat-avatar">🐈‍⬛</div>
+      <div class="cat-accessory" id="equipped-accessory">🎀</div>
+    </div>
   </div>
 
   <script>
@@ -580,6 +716,18 @@
 
     const numberNames = ['Jeden', 'Dva', 'Tři', 'Čtyři', 'Pět', 'Šest', 'Sedm', 'Osm', 'Devět', 'Deset'];
 
+    // Shop Items Definition
+    const shopItems = [
+      { id: 'bow', name: 'Růžová mašle', icon: '🎀', price: 0, bought: true },
+      { id: 'glasses', name: 'Módní brýle', icon: '🕶️', price: 3, bought: false },
+      { id: 'crown', name: 'Královská korunka', icon: '👑', price: 5, bought: false },
+      { id: 'heart', name: 'Zářící srdíčko', icon: '💖', price: 8, bought: false },
+      { id: 'wand', name: 'Kouzelná hůlka', icon: '🪄', price: 12, bought: false },
+      { id: 'wings', name: 'Netopýří křídla', icon: '🦇', price: 15, bought: false }
+    ];
+
+    let equippedAccessory = '🎀';
+
     document.addEventListener('click', () => {
       if (audioCtx.state === 'suspended') audioCtx.resume();
     }, { once: true });
@@ -621,7 +769,7 @@
         btn.classList.toggle('active', idx + 1 === mode);
       });
 
-      for (let i = 1; i <= 5; i++) {
+      for (let i = 1; i <= 8; i++) {
         document.getElementById(`mode-${i}`).style.display = i === mode ? 'flex' : 'none';
       }
 
@@ -630,6 +778,9 @@
       if (mode === 3) initMode3();
       if (mode === 4) initMode4();
       if (mode === 5) initMode5();
+      if (mode === 6) initMode6();
+      if (mode === 7) initMode7();
+      if (mode === 8) initMode8();
     }
 
     // --- MODE 1: Nauka Čísel ---
@@ -703,7 +854,7 @@
       });
     }
 
-    // --- MODE 3: Porovnávání (Klikání na obrázky) ---
+    // --- MODE 3: Porovnávání ---
     let leftVal = 0, rightVal = 0;
 
     function initMode3() {
@@ -890,6 +1041,159 @@
       ctx.fillText('🎀', 250, 185);
 
       setTimeout(initMode5, 3000);
+    }
+
+    // --- MODE 6: Poslechni a Najdi ---
+    function initMode6() {
+      const container = document.getElementById('listen-options');
+      container.innerHTML = '';
+
+      const targetNum = Math.floor(Math.random() * 10) + 1;
+      currentAnswer = targetNum;
+
+      setInstruction(`Lili, najdi číslo ${targetNum}!`);
+
+      let choices = [targetNum];
+      while (choices.length < 5) {
+        let rnd = Math.floor(Math.random() * 10) + 1;
+        if (!choices.includes(rnd)) choices.push(rnd);
+      }
+      choices.sort(() => Math.random() - 0.5);
+
+      choices.forEach(num => {
+        const btn = document.createElement('button');
+        btn.className = 'num-btn';
+        btn.style.width = '85px';
+        btn.style.height = '85px';
+        btn.style.fontSize = '40px';
+        btn.innerText = num;
+        btn.onclick = () => {
+          if (num === currentAnswer) {
+            updateScore(1);
+            triggerCatCelebration();
+            setTimeout(initMode6, 2300);
+          } else {
+            playErrorSound();
+            speak(`To je číslo ${num}. Lili, hledej číslo ${targetNum}!`);
+          }
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    // --- MODE 7: Pexeso Čísla ---
+    let flippedCards = [];
+    let matchedPairs = 0;
+
+    function initMode7() {
+      setInstruction("Lili, najdi stejné dvojice! Číslo a počet obrázků.");
+      const board = document.getElementById('memory-board');
+      board.innerHTML = '';
+      flippedCards = [];
+      matchedPairs = 0;
+
+      // 4 pairs (8 cards total for 6yr old)
+      const pairs = [1, 2, 3, 4];
+      let cardsData = [];
+
+      pairs.forEach(num => {
+        cardsData.push({ val: num, type: 'num', display: num });
+        cardsData.push({ val: num, type: 'icon', display: '🎀'.repeat(num) });
+      });
+
+      cardsData.sort(() => Math.random() - 0.5);
+
+      cardsData.forEach((data, index) => {
+        const card = document.createElement('div');
+        card.className = 'memory-card';
+        card.dataset.val = data.val;
+        card.dataset.index = index;
+
+        card.onclick = () => {
+          if (card.classList.contains('flipped') || card.classList.contains('matched') || flippedCards.length >= 2) return;
+
+          playTone(450, 'sine', 0.1);
+          card.innerText = data.display;
+          card.classList.add('flipped');
+          flippedCards.push({ card, data });
+
+          if (flippedCards.length === 2) {
+            const [c1, c2] = flippedCards;
+            if (c1.data.val === c2.data.val) {
+              // Match
+              c1.card.classList.add('matched');
+              c2.card.classList.add('matched');
+              flippedCards = [];
+              matchedPairs++;
+              playTone(700, 'sine', 0.2);
+
+              if (matchedPairs === pairs.length) {
+                updateScore(3);
+                triggerCatCelebration();
+                setTimeout(initMode7, 3000);
+              }
+            } else {
+              // No match
+              setTimeout(() => {
+                playErrorSound();
+                c1.card.innerText = '';
+                c2.card.innerText = '';
+                c1.card.classList.remove('flipped');
+                c2.card.classList.remove('flipped');
+                flippedCards = [];
+              }, 1000);
+            }
+          }
+        };
+
+        board.appendChild(card);
+      });
+    }
+
+    // --- MODE 8: Obchůdek s odměnami ---
+    function initMode8() {
+      setInstruction("Vítá tě obchůdek! Utrať své trofeje a kup kočičce Crescent nové doplňky!");
+      const container = document.getElementById('shop-items-container');
+      container.innerHTML = '';
+
+      shopItems.forEach(item => {
+        const itemEl = document.createElement('div');
+        itemEl.className = 'shop-item';
+
+        const isEquipped = item.icon === equippedAccessory;
+
+        itemEl.innerHTML = `
+          <div class="icon">${item.icon}</div>
+          <div class="name">${item.name}</div>
+          <div class="price">${item.bought ? 'Koupeno' : item.price + ' 🏆'}</div>
+          <button class="buy-btn ${isEquipped ? 'equipped' : ''}" id="btn-shop-${item.id}">
+            ${isEquipped ? 'Oblečeno' : (item.bought ? 'Obléknout' : 'Koupit')}
+          </button>
+        `;
+
+        const btn = itemEl.querySelector(`#btn-shop-${item.id}`);
+        
+        if (!item.bought && score < item.price) {
+          btn.disabled = true;
+        }
+
+        btn.onclick = () => {
+          if (!item.bought) {
+            if (score >= item.price) {
+              score -= item.price;
+              item.bought = true;
+              updateScore(0);
+              playWinSound();
+              speak(`Lili, koupila jsi ${item.name}!`);
+            }
+          }
+          equippedAccessory = item.icon;
+          document.getElementById('equipped-accessory').innerText = equippedAccessory;
+          initMode8();
+        };
+
+        container.appendChild(itemEl);
+      });
     }
 
     // Fullscreen
