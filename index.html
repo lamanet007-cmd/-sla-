@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Monster High – Strašidelně zábavná čísla!</title>
+  <title>Monster High – Čísla pro Lili!</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Short+Stack&display=swap');
 
@@ -75,10 +75,10 @@
     h1 {
       margin: 0;
       font-family: 'Fredoka One', cursive;
-      font-size: 26px;
+      font-size: 24px;
       color: #fff;
       text-shadow: 0 0 10px var(--pink), 3px 3px 0px #000;
-      letter-spacing: 1.5px;
+      letter-spacing: 1px;
     }
 
     .fs-btn {
@@ -321,62 +321,61 @@
       font-size: 35px;
     }
 
-    /* Cat Mascot & Celebration Animation */
+    /* Cat Mascot in bottom-right corner without blocking clicks */
     .cat-container {
       position: fixed;
-      bottom: -200px;
-      left: 50%;
-      transform: translateX(-50%);
+      bottom: -220px;
+      right: 25px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      z-index: 1000;
-      pointer-events: none;
+      align-items: flex-end;
+      z-index: 10000;
+      pointer-events: none; /* Skrz kočku lze normálně klikat! */
       transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .cat-container.active {
-      bottom: 20px;
+      bottom: 15px;
     }
 
     .cat-avatar {
-      font-size: 110px;
+      font-size: 100px;
       filter: drop-shadow(0 0 20px var(--pink));
       animation: catDance 0.6s infinite alternate ease-in-out;
     }
 
     @keyframes catDance {
       0% { transform: translateY(0) rotate(-8deg) scale(1); }
-      100% { transform: translateY(-25px) rotate(8deg) scale(1.1); }
+      100% { transform: translateY(-20px) rotate(8deg) scale(1.08); }
     }
 
     .cat-speech {
       background: #fff;
       color: var(--black);
       font-family: 'Fredoka One', cursive;
-      font-size: 22px;
-      padding: 10px 20px;
+      font-size: 20px;
+      padding: 10px 18px;
       border-radius: 20px;
       border: 3px solid var(--pink);
       box-shadow: 0 0 15px var(--bright-pink);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       position: relative;
+      white-space: nowrap;
     }
 
     .cat-speech::after {
       content: '';
       position: absolute;
-      bottom: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-width: 12px 12px 0;
+      bottom: -10px;
+      right: 35px;
+      border-width: 10px 10px 0;
       border-style: solid;
       border-color: #fff transparent;
       display: block;
       width: 0;
     }
 
-    /* Mode 3: Connect Dots Canvas */
+    /* Mode 5: Connect Dots Canvas */
     .canvas-container {
       position: relative;
       width: 500px;
@@ -400,7 +399,8 @@
       .canvas-container { width: 320px; height: 260px; }
       .learn-card { width: 90px; height: 100px; }
       .learn-card .num { font-size: 30px; }
-      .cat-avatar { font-size: 80px; }
+      .cat-avatar { font-size: 75px; }
+      .cat-speech { font-size: 16px; }
     }
   </style>
 </head>
@@ -409,7 +409,7 @@
   <header>
     <div class="logo-container">
       <span class="skull-icon">💀🎀</span>
-      <h1>Monster High Čísla</h1>
+      <h1>Monster High Čísla pro Lili 💖</h1>
     </div>
     <button class="fs-btn" onclick="toggleFullScreen()">Full Screen ⛶</button>
   </header>
@@ -423,7 +423,7 @@
       <button class="mode-btn" onclick="switchMode(5)">Spojovačka</button>
     </div>
     <div class="score-board">
-      <span>Trofeje:</span>
+      <span>Trofeje Lili:</span>
       <span id="score-count" style="color: var(--yellow);">0</span>
       <span>🏆</span>
     </div>
@@ -432,7 +432,7 @@
   <div class="game-card">
     <div class="instruction-box" id="instruction" onclick="repeatInstruction()">
       <span id="speaker-icon">🔊</span>
-      <span id="instruction-text">Vítá tě Monster High! Vyber si hru.</span>
+      <span id="instruction-text">Ahoj Lili! Vítá tě Monster High. Vyber si hru!</span>
     </div>
 
     <!-- Mode 1: Nauka Čísel -->
@@ -474,9 +474,9 @@
     </div>
   </div>
 
-  <!-- Animated Cat Celebration Overlay -->
+  <!-- Animated Cat Celebration Overlay (Right bottom, click-through) -->
   <div class="cat-container" id="cat-mascot">
-    <div class="cat-speech" id="cat-text">Mňau! Úžasně! 💖</div>
+    <div class="cat-speech" id="cat-text">Mňau! Skvěle, Lili! 💖</div>
     <div class="cat-avatar">🐈‍⬛🎀</div>
   </div>
 
@@ -510,7 +510,7 @@
       setTimeout(() => playTone(160, 'sawtooth', 0.25), 150);
     }
 
-    // Czech Speech
+    // Czech Speech (incorporating Lili's name)
     function speak(text) {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
@@ -529,7 +529,13 @@
     let lastText = "";
 
     const monsterItems = ['🦇', '🎀', '🧪', '🕷️', '💄', '🔮', '⚡', '👑', '💀', '🌙'];
-    const catPraise = ['Mňau! To bylo skvělé!', 'Kočička Crescent tě chválí!', 'Mňau! Jsi šikovná!', 'Úžasná práce! 💖', 'Monster High tě miluje!'];
+    const catPraise = [
+      'Mňau! Výborně, Lili!',
+      'Kočička Crescent má z Lili radost!',
+      'Mňau! Lili, jsi šikovná!',
+      'Úžasná práce, Lili! 💖',
+      'Lili, to bylo super!'
+    ];
 
     const numberNames = ['Jeden', 'Dva', 'Tři', 'Čtyři', 'Pět', 'Šest', 'Sedm', 'Osm', 'Devět', 'Deset'];
 
@@ -587,7 +593,7 @@
 
     // --- MODE 1: Nauka Čísel ---
     function initMode1() {
-      setInstruction("Klikni na číslice a nauč se, jak vypadají a jak se čtou!");
+      setInstruction("Lili, klikni na číslice a nauč se, jak vypadají a jak se čtou!");
       const grid = document.getElementById('learn-grid');
       grid.innerHTML = '';
 
@@ -629,7 +635,7 @@
         container.appendChild(el);
       }
 
-      setInstruction(`Spočítej obrázky a klikni na správné číslo!`);
+      setInstruction(`Lili, spočítej obrázky a klikni na správné číslo!`);
 
       let choices = [count];
       while (choices.length < 4) {
@@ -649,7 +655,7 @@
             setTimeout(initMode2, 2300);
           } else {
             playErrorSound();
-            speak("Zkus to znovu!");
+            speak("Lili, zkus to ještě jednou!");
           }
         };
         options.appendChild(btn);
@@ -660,7 +666,7 @@
     let leftVal = 0, rightVal = 0;
 
     function initMode3() {
-      setInstruction("Kde je VÍCE věcí? Nebo je jich STEJNĚ?");
+      setInstruction("Lili, kde je VÍCE věcí? Nebo je jich STEJNĚ?");
       const leftEl = document.getElementById('compare-left');
       const rightEl = document.getElementById('compare-right');
       const options = document.getElementById('compare-options');
@@ -697,7 +703,7 @@
             setTimeout(initMode3, 2300);
           } else {
             playErrorSound();
-            speak("Zkus to ještě jednou porovnat.");
+            speak("Zkus to ještě jednou porovnat, Lili.");
           }
         };
         options.appendChild(btn);
@@ -722,7 +728,7 @@
       leftEl.innerText = icon.repeat(a);
       rightEl.innerText = icon.repeat(b);
 
-      setInstruction(`Spočítej všechny věci dohromady: ${a} + ${b}`);
+      setInstruction(`Lili, spočítej všechny věci dohromady: ${a} + ${b}`);
 
       let choices = [currentAnswer];
       while (choices.length < 3) {
@@ -742,7 +748,7 @@
             setTimeout(initMode4, 2300);
           } else {
             playErrorSound();
-            speak("Zkus to sečíst znovu!");
+            speak("Zkus to sečíst znovu, Lili!");
           }
         };
         options.appendChild(btn);
@@ -754,7 +760,7 @@
     let nextDotIndex = 0;
 
     function initMode5() {
-      setInstruction("Spoj tečky podle čísel od 1 do 5!");
+      setInstruction("Lili, spoj tečky podle čísel od 1 do 5!");
       const canvas = document.getElementById('connect-canvas');
       const ctx = canvas.getContext('2d');
       ctx.clearRect(0, 0, canvas.width, canvas.height);
