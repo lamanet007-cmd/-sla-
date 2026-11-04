@@ -406,21 +406,24 @@
     .shop-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 18px;
+      gap: 16px;
       justify-content: center;
-      max-width: 800px;
+      max-width: 850px;
+      max-height: 420px;
+      overflow-y: auto;
+      padding: 5px;
     }
 
     .shop-item {
       background: rgba(36, 0, 56, 0.85);
       border: 3px solid var(--purple);
       border-radius: 22px;
-      padding: 15px;
-      width: 180px;
+      padding: 12px;
+      width: 160px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       transition: all 0.2s;
     }
 
@@ -429,18 +432,18 @@
       transform: translateY(-3px);
     }
 
-    .shop-item .icon { font-size: 50px; }
-    .shop-item .name { font-family: 'Fredoka One', cursive; font-size: 16px; text-align: center; }
-    .shop-item .price { color: var(--yellow); font-family: 'Fredoka One', cursive; font-size: 18px; }
+    .shop-item .icon { font-size: 42px; }
+    .shop-item .name { font-family: 'Fredoka One', cursive; font-size: 14px; text-align: center; }
+    .shop-item .price { color: var(--yellow); font-family: 'Fredoka One', cursive; font-size: 16px; }
 
     .buy-btn {
       background: linear-gradient(135deg, var(--pink), var(--purple));
       border: 2px solid #fff;
       color: #fff;
-      padding: 8px 16px;
+      padding: 6px 14px;
       border-radius: 15px;
       font-family: 'Fredoka One', cursive;
-      font-size: 13px;
+      font-size: 12px;
       cursor: pointer;
       transition: all 0.2s;
     }
@@ -489,8 +492,9 @@
 
     .cat-accessory {
       position: absolute;
-      top: -15px;
-      font-size: 45px;
+      top: -12px;
+      right: 15px;
+      font-size: 42px;
       animation: catDance 0.6s infinite alternate ease-in-out;
     }
 
@@ -716,14 +720,18 @@
 
     const numberNames = ['Jeden', 'Dva', 'Tři', 'Čtyři', 'Pět', 'Šest', 'Sedm', 'Osm', 'Devět', 'Deset'];
 
-    // Shop Items Definition
+    // Expanded Monster High Cat-themed Shop Items
     const shopItems = [
       { id: 'bow', name: 'Růžová mašle', icon: '🎀', price: 0, bought: true },
-      { id: 'glasses', name: 'Módní brýle', icon: '🕶️', price: 3, bought: false },
-      { id: 'crown', name: 'Královská korunka', icon: '👑', price: 5, bought: false },
-      { id: 'heart', name: 'Zářící srdíčko', icon: '💖', price: 8, bought: false },
-      { id: 'wand', name: 'Kouzelná hůlka', icon: '🪄', price: 12, bought: false },
-      { id: 'wings', name: 'Netopýří křídla', icon: '🦇', price: 15, bought: false }
+      { id: 'ears', name: 'Strašidelné uši', icon: '🐾', price: 2, bought: false },
+      { id: 'collar', name: 'Obojek s lebkou', icon: '💀', price: 4, bought: false },
+      { id: 'vampire', name: 'Upíří pláštěk', icon: '🧛‍♀️', price: 6, bought: false },
+      { id: 'lightning', name: 'Bleskové uši', icon: '⚡', price: 8, bought: false },
+      { id: 'glasses', name: 'Monster brýle', icon: '🕶️', price: 10, bought: false },
+      { id: 'crown', name: 'Kočičí korunka', icon: '👑', price: 12, bought: false },
+      { id: 'hat', name: 'Čarodějná čepice', icon: '🔮', price: 14, bought: false },
+      { id: 'heart', name: 'Valentýnské srdce', icon: '💖', price: 16, bought: false },
+      { id: 'wings', name: 'Netopýří křídla', icon: '🦇', price: 20, bought: false }
     ];
 
     let equippedAccessory = '🎀';
@@ -1092,7 +1100,6 @@
       flippedCards = [];
       matchedPairs = 0;
 
-      // 4 pairs (8 cards total for 6yr old)
       const pairs = [1, 2, 3, 4];
       let cardsData = [];
 
@@ -1120,7 +1127,6 @@
           if (flippedCards.length === 2) {
             const [c1, c2] = flippedCards;
             if (c1.data.val === c2.data.val) {
-              // Match
               c1.card.classList.add('matched');
               c2.card.classList.add('matched');
               flippedCards = [];
@@ -1133,7 +1139,6 @@
                 setTimeout(initMode7, 3000);
               }
             } else {
-              // No match
               setTimeout(() => {
                 playErrorSound();
                 c1.card.innerText = '';
@@ -1150,9 +1155,9 @@
       });
     }
 
-    // --- MODE 8: Obchůdek s odměnami ---
+    // --- MODE 8: Obchůdek s kočičími doplňky ---
     function initMode8() {
-      setInstruction("Vítá tě obchůdek! Utrať své trofeje a kup kočičce Crescent nové doplňky!");
+      setInstruction("Vítá tě kočičí obchůdek! Utrať své trofeje a vybav kočičku Crescent skvělými kostýmy!");
       const container = document.getElementById('shop-items-container');
       container.innerHTML = '';
 
@@ -1167,7 +1172,7 @@
           <div class="name">${item.name}</div>
           <div class="price">${item.bought ? 'Koupeno' : item.price + ' 🏆'}</div>
           <button class="buy-btn ${isEquipped ? 'equipped' : ''}" id="btn-shop-${item.id}">
-            ${isEquipped ? 'Oblečeno' : (item.bought ? 'Obléknout' : 'Koupit')}
+            ${isEquipped ? 'Nasazeno' : (item.bought ? 'Nasadit' : 'Koupit')}
           </button>
         `;
 
